@@ -1,0 +1,431 @@
+---
+// src/pages/demo/gul-umit/index.astro
+import '../../../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gül & Ümit | Nikah Töreni</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* TEMEL YAZI TİPLERİ VE DOKULAR */
+    .font-script { font-family: 'Alex Brush', cursive; }
+    .font-cinzel { font-family: 'Cinzel', serif; }
+    .font-body { font-family: 'Montserrat', sans-serif; }
+    
+    body {
+      background-color: #f5f0e6;
+      background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png"); /* Gerçekçi grenli kağıt dokusu */
+      overflow-x: hidden;
+    }
+
+    /* ZARF ANİMASYONU (PRELOADER YERİNE) */
+    #envelope-wrapper {
+      perspective: 1000px;
+    }
+    .envelope {
+      width: 320px;
+      height: 220px;
+      background: #e6dfd1;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      border: 1px solid #d4c5b0;
+    }
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #e6dfd1;
+      clip-path: polygon(0 0, 50% 55%, 100% 0);
+      transform-origin: top;
+      transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 10;
+      border-top: 1px solid #d4c5b0;
+    }
+    .envelope-pocket {
+      position: absolute;
+      inset: 0;
+      background: #dfd6c5;
+      clip-path: polygon(0 100%, 0 0, 50% 50%, 100% 0, 100% 100%);
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .envelope.open .envelope-flap {
+      transform: rotateX(180deg);
+    }
+    .envelope-letter {
+      position: absolute;
+      bottom: 0;
+      left: 10px;
+      right: 10px;
+      height: 200px;
+      background: #fff;
+      z-index: 2;
+      transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.5s, opacity 1.5s ease 0.5s;
+      border: 1px solid #c9a86a;
+    }
+    .envelope.open .envelope-letter {
+      transform: translateY(-250px) scale(1.5);
+      opacity: 0;
+    }
+    .wax-seal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px;
+      height: 50px;
+      background: radial-gradient(circle, #b8995a, #8c6b2d);
+      border-radius: 50%;
+      z-index: 15;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2), inset 0 2px 5px rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .envelope.open .wax-seal {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* TAM SAYFA BOTANİK ÇERÇEVE */
+    .viewport-frame {
+      position: fixed;
+      inset: 15px;
+      border: 2px solid #c9a86a;
+      pointer-events: none;
+      z-index: 40;
+    }
+    .viewport-frame::after {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border: 1px solid rgba(201, 168, 106, 0.5);
+    }
+
+    /* DÜŞEN YAPRAKLAR ANİMASYONU */
+    .falling-leaf {
+      position: fixed;
+      top: -10%;
+      width: 25px;
+      height: 25px;
+      background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="%233a4d40" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6 2 2 8 2 14c0 3.5 2 6 5 8 5-2 9-5 13-10 2-3 2-7-2-10z"/></svg>');
+      background-size: contain;
+      background-repeat: no-repeat;
+      pointer-events: none;
+      z-index: 30;
+      opacity: 0.6;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.6; }
+      100% { transform: translate(100px, 110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* DEVASA SABİT YAPRAK KÜMELERİ (PARALLAX HİSSİ) */
+    .giant-branch {
+      position: fixed;
+      pointer-events: none;
+      z-index: 35;
+      filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15));
+    }
+    .branch-top-left {
+      top: -5%; left: -5%;
+      width: 45vw; max-width: 400px;
+      transform-origin: top left;
+      animation: branchSway 8s ease-in-out infinite alternate;
+    }
+    .branch-bottom-right {
+      bottom: -5%; right: -5%;
+      width: 50vw; max-width: 450px;
+      transform-origin: bottom right;
+      animation: branchSwayRev 9s ease-in-out infinite alternate;
+    }
+
+    @keyframes branchSway { 0% { transform: rotate(0deg); } 100% { transform: rotate(3deg); } }
+    @keyframes branchSwayRev { 0% { transform: rotate(0deg); } 100% { transform: rotate(-3deg); } }
+
+    /* İÇERİK ANİMASYONLARI */
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .hidden-mode { display: none !important; }
+  </style>
+</head>
+<body class="text-[#2c302e]">
+
+  <!-- ============================================== -->
+  <!-- 1. ZARF AÇILIŞI (PRELOADER)                    -->
+  <!-- ============================================== -->
+  <div id="envelope-screen" class="fixed inset-0 z-[100] bg-[#1a211c] flex flex-col items-center justify-center transition-all duration-1000">
+    <!-- Arka plan çiçek gölgeleri -->
+    <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/floral-motif.png')]"></div>
+    
+    <div class="text-center mb-10 relative z-10">
+      <p class="font-cinzel tracking-[0.4em] text-[#c9a86a] text-sm uppercase mb-2">Gül & Ümit</p>
+      <p class="font-cinzel text-white/50 text-xs tracking-widest">Davetiyeyi açmak için mühre dokunun</p>
+    </div>
+
+    <div id="envelope-wrapper" class="relative z-10 cursor-pointer hover:scale-105 transition-transform duration-500">
+      <div id="the-envelope" class="envelope">
+        <div class="envelope-letter flex items-center justify-center">
+          <div class="font-script text-5xl text-[#c9a86a]">G & Ü</div>
+        </div>
+        <div class="envelope-pocket"></div>
+        <div class="envelope-flap"></div>
+        <div class="wax-seal">GÜ</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- 2. TAM SAYFA BOTANİK ÇERÇEVELER                -->
+  <!-- ============================================== -->
+  <div class="viewport-frame"></div>
+
+  <!-- Yukarıdan Sarkan Dev Dal (Görsel İçin Gerçekçi SVG) -->
+  <svg class="giant-branch branch-top-left" viewBox="0 0 300 300" fill="none">
+    <path d="M-50 -50 Q 100 100 250 250" stroke="#1d2b21" stroke-width="4" fill="none"/>
+    <path d="M0 -50 Q 150 50 280 180" stroke="#c9a86a" stroke-width="2" fill="none" stroke-dasharray="4 4"/>
+    <!-- İri Yapraklar -->
+    <path d="M50 50 C 80 20 120 40 100 80 C 70 100 40 80 50 50 Z" fill="#2a3d30"/>
+    <path d="M120 120 C 160 80 200 110 180 160 C 140 180 100 150 120 120 Z" fill="#3a4d40"/>
+    <path d="M180 80 C 220 50 250 80 230 120 C 190 140 160 110 180 80 Z" fill="#223026"/>
+    <!-- Altın Yapraklar -->
+    <path d="M80 150 C 110 120 140 140 120 180 C 90 190 70 170 80 150 Z" fill="#c9a86a" opacity="0.85"/>
+    <path d="M220 200 C 250 170 280 190 260 230 C 230 240 210 220 220 200 Z" fill="#dfc699" opacity="0.9"/>
+  </svg>
+
+  <!-- Aşağıdan Çıkan Dev Dal -->
+  <svg class="giant-branch branch-bottom-right" viewBox="0 0 300 300" fill="none">
+    <path d="M350 350 Q 200 200 50 50" stroke="#1d2b21" stroke-width="4" fill="none"/>
+    <path d="M300 350 Q 150 250 20 120" stroke="#c9a86a" stroke-width="2" fill="none" stroke-dasharray="4 4"/>
+    <!-- İri Yapraklar -->
+    <path d="M250 250 C 220 280 180 260 200 220 C 230 200 260 220 250 250 Z" fill="#2a3d30"/>
+    <path d="M180 180 C 140 220 100 190 120 140 C 160 120 200 150 180 180 Z" fill="#3a4d40"/>
+    <path d="M120 220 C 80 250 50 220 70 180 C 110 160 140 190 120 220 Z" fill="#223026"/>
+    <!-- Altın Yapraklar -->
+    <path d="M220 150 C 190 180 160 160 180 120 C 210 110 230 130 220 150 Z" fill="#c9a86a" opacity="0.85"/>
+    <path d="M80 100 C 50 130 20 110 40 70 C 70 60 90 80 80 100 Z" fill="#dfc699" opacity="0.9"/>
+  </svg>
+
+  <!-- Dinamik Düşen Yapraklar (JS ile eklenecek) -->
+  <div id="leaves-container"></div>
+
+  <!-- ARKA PLAN MÜZİĞİ -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://cdn.pixabay.com/audio/2022/01/18/audio_d0a13f69d2.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- MÜZİK KONTROLÜ -->
+  <button id="musicBtn" class="fixed bottom-8 right-8 z-50 bg-[#1d2b21] border border-[#c9a86a] text-[#c9a86a] p-4 rounded-full shadow-2xl hover:bg-[#c9a86a] hover:text-[#1d2b21] transition duration-300">
+    <svg id="musicIconPlay" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>
+    <svg id="musicIconPause" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+  </button>
+
+  <!-- FAZ DEĞİŞTİRİCİ YÜZEN BUTON -->
+  <button id="timeMachineBtn" class="fixed bottom-8 left-8 z-50 bg-[#fffdfa] text-[#1d2b21] border border-[#c9a86a] px-6 py-4 rounded-none text-xs font-cinzel tracking-widest uppercase hover:bg-[#c9a86a] hover:text-white transition-all shadow-xl">
+    <span id="btnText">Nikah Sonrası Görünüm</span>
+  </button>
+
+  <!-- ============================================== -->
+  <!-- 3. ANA İÇERİK (SINIRSIZ KANVAS MANTIKLI)       -->
+  <!-- ============================================== -->
+  <main class="relative z-20 w-full min-h-screen pt-32 pb-40 px-6 flex flex-col items-center">
+    
+    <div class="w-full max-w-3xl mx-auto text-center reveal">
+      <p class="font-cinzel tracking-[0.4em] text-[#556358] text-sm uppercase mb-10 font-bold border-b border-[#c9a86a] inline-block pb-2">Birlikte Yeni Bir Hayata</p>
+      
+      <!-- Devasa İsimler -->
+      <h1 class="font-script text-[7rem] sm:text-[13rem] text-[#131d16] leading-[0.7] tracking-tighter drop-shadow-lg">Gül</h1>
+      <div class="flex items-center justify-center gap-8 my-8 sm:my-12">
+        <div class="w-32 h-[1px] bg-[#c9a86a]"></div>
+        <span class="font-script text-6xl sm:text-8xl text-[#c9a86a]">&</span>
+        <div class="w-32 h-[1px] bg-[#c9a86a]"></div>
+      </div>
+      <h1 class="font-script text-[7rem] sm:text-[13rem] text-[#131d16] leading-[0.7] tracking-tighter drop-shadow-lg">Ümit</h1>
+      
+      <p class="font-cinzel text-lg sm:text-2xl tracking-[0.3em] text-[#1a261e] font-bold mt-16 sm:mt-24 mb-4">
+        NİKAH TÖRENİMİZDE
+      </p>
+      <p class="font-cinzel text-xs sm:text-sm tracking-[0.2em] text-[#4d5b51] uppercase font-semibold">
+        Sizleri de aramızda görmekten mutluluk duyarız.
+      </p>
+    </div>
+
+    <!-- FAZ 1: NİKAH ÖNCESİ -->
+    <div id="preWeddingMode" class="w-full max-w-4xl mx-auto mt-20 relative z-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        
+        <!-- Tarih Kartı -->
+        <div class="p-10 border border-[#c9a86a] bg-white/40 backdrop-blur-md text-center reveal shadow-xl hover:-translate-y-2 transition-transform duration-500">
+          <h3 class="font-cinzel text-2xl text-[#1d2b21] mb-2 font-bold tracking-widest">6 EYLÜL 2026</h3>
+          <p class="font-script text-4xl text-[#5c6e61] mb-6">Pazar</p>
+          <div class="w-12 h-[2px] bg-[#c9a86a] mx-auto mb-6"></div>
+          <p class="font-cinzel text-5xl text-[#1d2b21]">15.00</p>
+        </div>
+
+        <!-- Mekan Kartı -->
+        <div class="p-10 border border-[#c9a86a] bg-white/40 backdrop-blur-md text-center reveal shadow-xl hover:-translate-y-2 transition-transform duration-500 flex flex-col justify-center">
+          <h3 class="font-cinzel text-xl text-[#1d2b21] mb-4 font-bold tracking-[0.15em] leading-relaxed">
+            ETİMESGUT BELEDİYESİ<br>Korkut Ata Kongre<br>ve Kültür Merkezi
+          </h3>
+          <p class="font-cinzel text-xs tracking-widest text-[#5c6e61]">Etimesgut, Ankara</p>
+          
+          <div class="flex flex-col gap-3 mt-8">
+            <a href="#" target="_blank" class="w-full bg-[#1d2b21] text-[#f5f0e6] font-cinzel text-xs tracking-widest uppercase py-4 hover:bg-[#c9a86a] transition duration-300">Yol Tarifi Al</a>
+            <a href="#" target="_blank" class="w-full border border-[#1d2b21] text-[#1d2b21] font-cinzel text-xs tracking-widest uppercase py-4 hover:bg-[#1d2b21] hover:text-white transition duration-300">Takvime Ekle</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FAZ 2: NİKAH SONRASI -->
+    <div id="postWeddingMode" class="hidden-mode w-full max-w-5xl mx-auto mt-20 relative z-20">
+      <div class="text-center reveal">
+        <h2 class="font-cinzel text-2xl sm:text-3xl tracking-[0.2em] text-[#1d2b21] uppercase mb-12 font-bold border-b border-[#c9a86a] inline-block pb-4">
+          EN MUTLU GÜNÜMÜZÜN HATIRALARI
+        </h2>
+        
+        <button class="w-full sm:w-auto bg-[#c9a86a] text-white font-cinzel text-sm tracking-[0.2em] uppercase px-12 py-6 hover:bg-[#1d2b21] transition duration-500 shadow-2xl flex items-center justify-center mx-auto gap-4 mb-16 font-bold group">
+          <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+          Siz de Fotoğraf / Video Yükleyin
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal mb-16">
+        <div class="p-3 bg-white shadow-2xl border border-[#d4c5b0] transform -rotate-2 hover:rotate-0 transition-transform duration-500">
+          <img src="https://placehold.co/800x600/223026/c9a86a?text=Nikah+Karesi+1" class="w-full h-80 object-cover border border-[#f5f0e6]">
+        </div>
+        <div class="p-3 bg-white shadow-2xl border border-[#d4c5b0] transform rotate-2 hover:rotate-0 transition-transform duration-500">
+          <img src="https://placehold.co/800x600/223026/c9a86a?text=Nikah+Karesi+2" class="w-full h-80 object-cover border border-[#f5f0e6]">
+        </div>
+      </div>
+
+      <div class="text-center reveal max-w-2xl mx-auto">
+        <h4 class="font-cinzel text-lg tracking-[0.2em] uppercase text-[#1d2b21] mb-8 font-bold">Tebrik Notları</h4>
+        <div class="bg-white p-10 border border-[#d4c5b0] shadow-xl relative mb-8">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 text-[#c9a86a] text-4xl font-serif">"</div>
+          <p class="text-lg italic text-[#2a3d30] leading-relaxed mt-4">Bir ömür boyu el ele, sevgiyle ve sağlıkla kalın. Çok tebrik ederiz, her şey masal gibiydi!</p>
+          <p class="text-right text-sm font-cinzel text-[#c9a86a] mt-6 font-bold">- Caner & Elif</p>
+        </div>
+        <button class="border border-[#1d2b21] text-[#1d2b21] font-cinzel text-xs tracking-widest uppercase px-10 py-4 hover:bg-[#1d2b21] hover:text-white transition duration-500">
+          Tebrik Mesajı Bırak
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // 1. ZARF ANİMASYONU VE MÜZİK
+    const envWrapper = document.getElementById('envelope-wrapper');
+    const envelope = document.getElementById('the-envelope');
+    const envScreen = document.getElementById('envelope-screen');
+    const bgMusic = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+    const playIcon = document.getElementById('musicIconPlay');
+    const pauseIcon = document.getElementById('musicIconPause');
+    let isPlaying = false;
+
+    function playAudio() {
+      if (!bgMusic) return;
+      bgMusic.play().then(() => {
+        isPlaying = true;
+        playIcon.classList.add('hidden');
+        pauseIcon.classList.remove('hidden');
+      }).catch(e => console.log("Otomatik oynatma bekliyor:", e));
+    }
+
+    envWrapper?.addEventListener('click', () => {
+      // Zarfı Aç
+      envelope.classList.add('open');
+      playAudio(); // Müziği Başlat
+      
+      // Sayfaya Geçiş
+      setTimeout(() => {
+        envScreen.style.opacity = '0';
+        setTimeout(() => {
+          envScreen.style.display = 'none';
+        }, 1000);
+      }, 1500); // Mektup çıktıktan sonra ekran kararır
+    });
+
+    musicBtn?.addEventListener('click', () => {
+      if (isPlaying) {
+        bgMusic.pause();
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+        isPlaying = false;
+      } else {
+        playAudio();
+      }
+    });
+
+    // 2. DÜŞEN YAPRAKLAR ÜRETİCİSİ (JS)
+    const leavesContainer = document.getElementById('leaves-container');
+    function createLeaf() {
+      const leaf = document.createElement('div');
+      leaf.classList.add('falling-leaf');
+      leaf.style.left = Math.random() * 100 + 'vw';
+      leaf.style.animationDuration = Math.random() * 5 + 10 + 's'; // 10-15s
+      leaf.style.transform = `scale(${Math.random() * 0.5 + 0.5})`; // 0.5 - 1 size
+      leavesContainer.appendChild(leaf);
+      
+      setTimeout(() => { leaf.remove(); }, 15000);
+    }
+    // Her 2 saniyede bir yaprak düşür
+    setInterval(createLeaf, 2000);
+    // İlk açılışta 3 yaprak
+    for(let i=0; i<3; i++) createLeaf();
+
+    // 3. ZAMAN MAKİNESİ (FAZ GEÇİŞİ)
+    let isPost = false;
+    const timeBtn = document.getElementById('timeMachineBtn');
+    const btnText = document.getElementById('btnText');
+    const preMode = document.getElementById('preWeddingMode');
+    const postMode = document.getElementById('postWeddingMode');
+
+    timeBtn?.addEventListener('click', () => {
+      isPost = !isPost;
+      preMode?.classList.toggle('hidden-mode');
+      postMode?.classList.toggle('hidden-mode');
+      btnText.innerText = isPost ? "Davetiyeye Dön" : "Nikah Sonrası Görünüm";
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => initAnimations(), 100);
+    });
+
+    // 4. SCROLL ANİMASYONLARI
+    function initAnimations() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) e.target.classList.add('active');
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach((el) => {
+        el.classList.remove('active');
+        observer.observe(el);
+      });
+    }
+    window.addEventListener('DOMContentLoaded', initAnimations);
+  </script>
+</body>
+</html>

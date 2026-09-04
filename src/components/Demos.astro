@@ -4,22 +4,25 @@ const demos = [
   {
     names: "Nurbanu & Şahin",
     theme: "Klasik & Zarif",
-    image: "https://placehold.co/600x400/f8fafc/334155?text=Klasik+Tema",
-    link: "#demo-1",
+    // Görsel rengi temanın altın/krem tonlarına uyarlandı
+    image: "https://placehold.co/600x400/FDFBF7/B99A5A?text=Klasik+Tema", 
+    link: "/demo/nurbanu-sahin", // Gerçek dosya yolumuz
     description: "Sade çizgiler, serif fontlar ve romantik bir hava arayan çiftler için."
   },
   {
     names: "Burcu & Efecan",
     theme: "Modern & Dinamik",
-    image: "https://placehold.co/600x400/fdf2f8/e11d48?text=Modern+Tema",
-    link: "#demo-2",
+    // Görsel rengi temanın karanlık/neon tonlarına uyarlandı
+    image: "https://placehold.co/600x400/0F172A/22D3EE?text=Modern+Tema", 
+    link: "/demo/burcu-efecan", // Gerçek dosya yolumuz
     description: "Canlı renkler, hareketli geçişler ve modern tipografi ile öne çıkın."
   },
   {
     names: "Aylin & Mert",
     theme: "Minimalist",
-    image: "https://placehold.co/600x400/f1f5f9/0f172a?text=Minimalist+Tema",
-    link: "#demo-3",
+    // Görsel rengi temanın siyah/beyaz tonlarına uyarlandı
+    image: "https://placehold.co/600x400/FFFFFF/1A1A1A?text=Minimalist+Tema", 
+    link: "/demo/aylin-mert", // Gerçek dosya yolumuz
     description: "Sadece en önemli detaylara odaklanan, temiz ve ferah tasarım."
   }
 ];
@@ -28,22 +31,24 @@ const demos = [
 <section id="demos" class="py-20 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl">Size Uygun Tasarımı Seçin</h2>
-      <p class="mt-4 text-lg text-slate-600">Her zevke uygun olarak hazırladığımız şablonlarımızdan dilediğinizi seçin, hemen özelleştirelim.</p>
+      <h2 class="text-3xl font-bold text-stone-900 sm:text-4xl">Size Uygun Tasarımı Seçin</h2>
+      <p class="mt-4 text-lg text-stone-600">Her zevke uygun olarak hazırladığımız şablonlarımızdan dilediğinizi seçin, hemen özelleştirelim.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
       {demos.map((demo) => (
-        <div class="group relative bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl transition-all duration-300">
-          <div class="aspect-w-3 aspect-h-2 bg-slate-200 overflow-hidden">
-            <!-- Geçici olarak placehold imajları kullanıyoruz, ileride gerçek ekran görüntüleri eklenecek -->
+        <div class="group relative bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden hover:shadow-xl transition-all duration-300">
+          <div class="aspect-w-3 aspect-h-2 bg-stone-200 overflow-hidden border-b border-stone-100">
+            <!-- Gerçek sitenin ekran görüntüleri gelene kadar temaya uygun placehold kullanıyoruz -->
             <img src={demo.image} alt={demo.theme} class="w-full h-48 object-cover object-center group-hover:scale-105 transition-transform duration-500" />
           </div>
           <div class="p-6">
-            <span class="text-sm font-medium text-rose-600 mb-1 block">{demo.theme}</span>
-            <h3 class="text-2xl font-bold text-slate-900 mb-2">{demo.names}</h3>
-            <p class="text-slate-600 mb-6">{demo.description}</p>
-            <a href={demo.link} class="inline-flex items-center text-slate-900 font-semibold hover:text-rose-600 transition-colors">
+            <span class="text-sm font-medium text-rose-500 mb-1 block">{demo.theme}</span>
+            <h3 class="text-2xl font-bold text-stone-900 mb-2">{demo.names}</h3>
+            <p class="text-stone-600 mb-6">{demo.description}</p>
+            
+            <!-- target="_blank" ile yeni sekmede açılmasını sağladık -->
+            <a href={demo.link} target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-stone-900 font-semibold hover:text-rose-500 transition-colors">
               Canlı Önizleme 
               <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
             </a>

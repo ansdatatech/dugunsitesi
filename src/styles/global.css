@@ -1,0 +1,24 @@
+/* src/styles/global.css */
+@import "tailwindcss";
+
+@theme {
+  --font-lato: "Lato", sans-serif;
+  --font-playfair: "Playfair Display", serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: var(--font-lato);
+    /* slate-50 ve slate-800 yerine daha sıcak tonlar: */
+    @apply bg-stone-50 text-stone-800; 
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair);
+    @apply tracking-tight;
+  }
+}

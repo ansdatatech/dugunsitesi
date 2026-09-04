@@ -1,0 +1,97 @@
+---
+// src/components/Pricing.astro
+---
+
+<section id="fiyatlandirma" class="py-20 bg-stone-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-bold text-stone-900 sm:text-4xl">Şeffaf Fiyatlandırma</h2>
+      <p class="mt-4 text-lg text-stone-600">İhtiyacınıza uygun paketi seçin, sürpriz maliyetlerle karşılaşmayın.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
+      
+      <!-- Standart Paket -->
+      <div class="bg-white rounded-2xl shadow-sm border border-stone-200 p-8 hover:shadow-md transition-shadow">
+        <h3 class="text-2xl font-semibold text-stone-900">Standart</h3>
+        <p class="text-stone-500 mt-2 mb-6">Temel dijital davetiye ihtiyacı için.</p>
+        <div class="text-4xl font-bold text-stone-900 mb-6">₺1.500</div>
+        <ul class="space-y-4 mb-8">
+          <li class="flex items-center text-stone-600">
+            <svg class="w-5 h-5 text-emerald-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Hazır Şablon Seçimi
+          </li>
+          <li class="flex items-center text-stone-600">
+            <svg class="w-5 h-5 text-emerald-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Temel LCV (RSVP) Formu
+          </li>
+          <li class="flex items-center text-stone-600">
+            <svg class="w-5 h-5 text-emerald-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Google Haritalar Entegrasyonu
+          </li>
+          <li class="flex items-center text-stone-400">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            Ortak Fotoğraf Galerisi Yok
+          </li>
+        </ul>
+        <button class="w-full py-3 px-4 bg-stone-100 text-stone-800 font-semibold rounded-xl hover:bg-stone-200 transition">Seç</button>
+      </div>
+
+      <!-- Premium Paket (Vurgulu) -->
+      <div class="bg-gradient-to-br from-rose-500 to-orange-500 rounded-2xl shadow-xl border border-rose-400 p-8 transform md:-translate-y-4 relative">
+        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <span class="bg-stone-900 text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full shadow-md">En Çok Tercih Edilen</span>
+        </div>
+        <h3 class="text-2xl font-semibold text-white drop-shadow-sm">Premium</h3>
+        <p class="text-rose-50 mt-2 mb-6">Unutulmaz anılar biriktirmek isteyenler için.</p>
+        <div class="text-4xl font-bold text-white mb-6 drop-shadow-sm">₺3.000</div>
+        <ul class="space-y-4 mb-8">
+          <li class="flex items-center text-white">
+            <svg class="w-5 h-5 text-rose-100 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Standart Paketteki Her Şey
+          </li>
+          <li class="flex items-center text-white">
+            <svg class="w-5 h-5 text-rose-100 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Ortak Fotoğraf & Video Havuzu (QR)
+          </li>
+          <li class="flex items-center text-white">
+            <svg class="w-5 h-5 text-rose-100 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Gelişmiş Misafir & Masa Yönetimi
+          </li>
+          <li class="flex items-center text-white">
+            <svg class="w-5 h-5 text-rose-100 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            1 Yıl Boyunca Yayın Süresi
+          </li>
+        </ul>
+        <button class="w-full py-3 px-4 bg-white text-rose-500 font-bold rounded-xl hover:bg-rose-50 hover:scale-105 transition-all duration-300 shadow-md">Hemen Başla</button>
+      </div>
+
+      <!-- Özel Paket -->
+      <div class="bg-white rounded-2xl shadow-sm border border-stone-200 p-8 hover:shadow-md transition-shadow">
+        <h3 class="text-2xl font-semibold text-stone-900">Özel Alan Adı</h3>
+        <p class="text-stone-500 mt-2 mb-6">Prestijini dijitale taşımak isteyen çiftlere özel.</p>
+        <div class="text-4xl font-bold text-stone-900 mb-6">₺5.000+</div>
+        <ul class="space-y-4 mb-8">
+          <li class="flex items-center text-stone-600">
+            <svg class="w-5 h-5 text-emerald-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Premium Paketteki Her Şey
+          </li>
+          <li class="flex items-center text-stone-600">
+            <svg class="w-5 h-5 text-emerald-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Özel Domain (örn: isminiz.com)
+          </li>
+          <li class="flex items-center text-stone-600">
+            <svg class="w-5 h-5 text-emerald-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Sıfırdan Özel Tasarım Şablonu
+          </li>
+          <li class="flex items-center text-stone-600">
+            <svg class="w-5 h-5 text-emerald-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Öncelikli Teknik Destek
+          </li>
+        </ul>
+        <button class="w-full py-3 px-4 bg-stone-100 text-stone-800 font-semibold rounded-xl hover:bg-stone-200 transition">İletişime Geç</button>
+      </div>
+
+    </div>
+  </div>
+</section>

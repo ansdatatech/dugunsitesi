@@ -1,0 +1,48 @@
+---
+// src/components/HowItWorks.astro
+const steps = [
+  {
+    number: "01",
+    title: "Şablonunuzu Seçin",
+    description: "Zevkinize en uygun tasarımı belirleyin. Renkleri ve fontları düğün konseptinize göre özelleştirelim."
+  },
+  {
+    number: "02",
+    title: "Bilgilerinizi İletin",
+    description: "Hikayenizi, mekan detaylarını ve fotoğraflarınızı bize gönderin. Geri kalan tüm teknik süreci biz halledelim."
+  },
+  {
+    number: "03",
+    title: "Siteniz Yayında",
+    description: "Size özel alan adınızla (örn: isminiz.com) siteniz 48 saat içinde hazır. Linki misafirlerinize hemen gönderin."
+  },
+  {
+    number: "04",
+    title: "LCV ve Anı Toplama",
+    description: "Kimlerin geleceğini panelden takip edin. Düğün günü misafirleriniz QR kod ile anında fotoğraf yüklesin."
+  }
+];
+---
+
+<section id="nasil-calisir" class="py-20 bg-gradient-to-br from-rose-500 via-pink-500 to-orange-500 text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-bold sm:text-4xl drop-shadow-md">Süreç Nasıl İşliyor?</h2>
+      <p class="mt-4 text-lg text-rose-50 font-medium">Düğün telaşında size ekstra yük olmamak için her şeyi basitleştirdik.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {steps.map((step) => (
+        <div class="relative p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/30 hover:bg-white/20 hover:-translate-y-2 transition-all duration-300 shadow-xl group">
+          
+          <div class="text-6xl font-playfair font-bold text-white/20 absolute top-4 right-4 group-hover:text-white/40 transition-colors drop-shadow-sm">
+            {step.number}
+          </div>
+          
+          <h3 class="text-xl font-semibold mt-10 mb-3 text-white drop-shadow-sm">{step.title}</h3>
+          <p class="text-rose-50 leading-relaxed">{step.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

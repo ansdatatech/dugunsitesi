@@ -200,7 +200,7 @@ import '../../../styles/global.css';
   <!-- ============================================== -->
   <div class="viewport-frame"></div>
 
-  <!-- Yukarıdan Sarkan Dev Dal (Görsel İçin Gerçekçi SVG) -->
+  <!-- Yukarıdan Sarkan Dev Dal -->
   <svg class="giant-branch branch-top-left" viewBox="0 0 300 300" fill="none">
     <path d="M-50 -50 Q 100 100 250 250" stroke="#1d2b21" stroke-width="4" fill="none"/>
     <path d="M0 -50 Q 150 50 280 180" stroke="#c9a86a" stroke-width="2" fill="none" stroke-dasharray="4 4"/>
@@ -226,7 +226,7 @@ import '../../../styles/global.css';
     <path d="M80 100 C 50 130 20 110 40 70 C 70 60 90 80 80 100 Z" fill="#dfc699" opacity="0.9"/>
   </svg>
 
-  <!-- Dinamik Düşen Yapraklar (JS ile eklenecek) -->
+  <!-- Dinamik Düşen Yapraklar -->
   <div id="leaves-container"></div>
 
   <!-- ARKA PLAN MÜZİĞİ -->
@@ -246,7 +246,7 @@ import '../../../styles/global.css';
   </button>
 
   <!-- ============================================== -->
-  <!-- 3. ANA İÇERİK (SINIRSIZ KANVAS MANTIKLI)       -->
+  <!-- 3. ANA İÇERİK (SINIRSIZ KANVAS)                -->
   <!-- ============================================== -->
   <main class="relative z-20 w-full min-h-screen pt-32 pb-40 px-6 flex flex-col items-center">
     
@@ -290,8 +290,9 @@ import '../../../styles/global.css';
           <p class="font-cinzel text-xs tracking-widest text-[#5c6e61]">Etimesgut, Ankara</p>
           
           <div class="flex flex-col gap-3 mt-8">
-            <a href="#" target="_blank" class="w-full bg-[#1d2b21] text-[#f5f0e6] font-cinzel text-xs tracking-widest uppercase py-4 hover:bg-[#c9a86a] transition duration-300">Yol Tarifi Al</a>
-            <a href="#" target="_blank" class="w-full border border-[#1d2b21] text-[#1d2b21] font-cinzel text-xs tracking-widest uppercase py-4 hover:bg-[#1d2b21] hover:text-white transition duration-300">Takvime Ekle</a>
+            <!-- DÜZELTİLEN LİNKLER -->
+            <a href="https://maps.google.com/?q=Korkut+Ata+Kongre+ve+Kültür+Merkezi+Etimesgut" target="_blank" class="w-full bg-[#1d2b21] text-[#f5f0e6] font-cinzel text-xs tracking-widest uppercase py-4 hover:bg-[#c9a86a] transition duration-300">Yol Tarifi Al</a>
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Gül+%26+Ümit+Nikah+Töreni&dates=20260906T120000Z/20260906T133000Z&location=Korkut+Ata+Kongre+ve+Kültür+Merkezi,+Etimesgut,+Ankara" target="_blank" class="w-full border border-[#1d2b21] text-[#1d2b21] font-cinzel text-xs tracking-widest uppercase py-4 hover:bg-[#1d2b21] hover:text-white transition duration-300">Takvime Ekle</a>
           </div>
         </div>
 
@@ -356,17 +357,15 @@ import '../../../styles/global.css';
     }
 
     envWrapper?.addEventListener('click', () => {
-      // Zarfı Aç
       envelope.classList.add('open');
-      playAudio(); // Müziği Başlat
+      playAudio();
       
-      // Sayfaya Geçiş
       setTimeout(() => {
         envScreen.style.opacity = '0';
         setTimeout(() => {
           envScreen.style.display = 'none';
         }, 1000);
-      }, 1500); // Mektup çıktıktan sonra ekran kararır
+      }, 1500); 
     });
 
     musicBtn?.addEventListener('click', () => {
@@ -392,9 +391,7 @@ import '../../../styles/global.css';
       
       setTimeout(() => { leaf.remove(); }, 15000);
     }
-    // Her 2 saniyede bir yaprak düşür
     setInterval(createLeaf, 2000);
-    // İlk açılışta 3 yaprak
     for(let i=0; i<3; i++) createLeaf();
 
     // 3. ZAMAN MAKİNESİ (FAZ GEÇİŞİ)

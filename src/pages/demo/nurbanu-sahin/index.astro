@@ -1,0 +1,272 @@
+---
+// src/pages/demo/nurbanu-sahin/index.astro
+import '../../../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nurbanu & Şahin | Birlikte Yeni Bir Hayata</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    .font-handwriting { font-family: 'Great Vibes', cursive; }
+    .font-serif-classic { font-family: 'Playfair Display', serif; }
+    
+    /* Scroll ve Animasyonlar */
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .hidden-mode { display: none !important; }
+    
+    /* Dönen Plak Efekti (Müzik İkonu İçin) */
+    .spin-slow { animation: spin 4s linear infinite; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+<body class="bg-[#FDFBF7] text-stone-800 font-serif-classic overflow-x-hidden relative">
+
+  <!-- PRELOADER (Karşılama Ekranı) -->
+  <div id="preloader" class="fixed inset-0 z-[100] bg-[#FDFBF7] flex flex-col items-center justify-center transition-opacity duration-1000">
+    <div class="font-handwriting text-8xl text-[#B99A5A] animate-pulse drop-shadow-md">N <span class="text-4xl text-stone-400">&</span> Ş</div>
+    <p class="text-stone-400 tracking-widest mt-6 uppercase text-xs">Yükleniyor...</p>
+  </div>
+
+  <!-- ARKA PLAN MÜZİĞİ -->
+  <audio id="bgMusic" loop src="https://cdn.pixabay.com/audio/2022/01/18/audio_d0a13f69d2.mp3"></audio>
+  <button id="musicBtn" class="fixed bottom-6 right-6 z-50 bg-white border border-[#E8E1D5] text-[#B99A5A] p-4 rounded-full shadow-xl hover:scale-110 transition-transform">
+    <svg id="musicIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+  </button>
+
+  <!-- ZAMAN MAKİNESİ BUTONU -->
+  <button id="timeMachineBtn" class="fixed bottom-6 left-6 z-50 bg-stone-900 text-white px-6 py-3 rounded-full text-xs tracking-widest uppercase hover:bg-[#B99A5A] hover:scale-105 transition-all shadow-xl flex items-center gap-2">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    <span id="btnText">Düğün Sonrası</span>
+  </button>
+
+  <!-- ============================================== -->
+  <!-- KAHRAMAN ALANI (SABİT)                         -->
+  <!-- ============================================== -->
+  <section class="min-h-screen flex flex-col items-center justify-center relative px-4 text-center overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/floral-motif.png')]"></div>
+    
+    <div class="z-10 mt-10 reveal">
+      <p id="heroSubtitle" class="uppercase tracking-[0.3em] text-stone-500 text-sm mb-6 transition-all duration-500">Birlikte Yeni Bir Hayata</p>
+      
+      <h1 class="font-handwriting text-7xl md:text-9xl text-[#B99A5A] mb-4 drop-shadow-sm">Nurbanu</h1>
+      <span class="font-handwriting text-5xl md:text-7xl text-stone-400">&</span>
+      <h1 class="font-handwriting text-7xl md:text-9xl text-[#B99A5A] mt-4 mb-12 drop-shadow-sm">Şahin</h1>
+      
+      <div class="w-24 h-[1px] bg-[#B99A5A] mx-auto mb-8"></div>
+      
+      <p class="text-2xl md:text-3xl text-stone-700">21 Mayıs 2026</p>
+      <p class="text-stone-500 mt-2">Ankara</p>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- FAZ 1: DÜĞÜN ÖNCESİ (TAM SÜRÜM)               -->
+  <!-- ============================================== -->
+  <div id="preWeddingMode">
+    
+    <section class="py-20 px-4 max-w-3xl mx-auto text-center reveal">
+      <h2 class="text-3xl text-[#B99A5A] mb-8">Davetlisiniz</h2>
+      <p class="text-lg leading-relaxed text-stone-600">
+        Hayatımızı birleştireceğimiz bu en mutlu günümüzde, siz değerli ailemizi ve dostlarımızı yanımızda görmekten büyük onur duyacağız. Sevincimizi paylaşmak dileğiyle...
+      </p>
+    </section>
+
+    <section class="py-20 px-4 reveal">
+      <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
+        
+        <!-- Kına -->
+        <div class="text-center p-10 border border-[#E8E1D5] rounded-tl-[3rem] rounded-br-[3rem] bg-white shadow-sm hover:shadow-md transition">
+          <h3 class="font-handwriting text-5xl text-[#B99A5A] mb-4">Kına</h3>
+          <p class="text-xl text-stone-800 mb-2">19 Mayıs 2026, Salı</p>
+          <p class="text-stone-500 mb-6">Saat: 19.00 - 23.30</p>
+          <p class="text-stone-600 mb-6"><strong>Tarihi Konak</strong><br>Altındağ, Ankara</p>
+          
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="#" class="inline-block border border-[#B99A5A] text-[#B99A5A] px-6 py-2 hover:bg-[#B99A5A] hover:text-white transition duration-300">Haritada Gör</a>
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Nurbanu+%26+%C5%9Eahin+K%C4%B1na&dates=20260519T160000Z/20260519T203000Z" target="_blank" class="inline-block border border-stone-300 text-stone-600 px-6 py-2 hover:bg-stone-100 transition duration-300">🗓️ Takvime Ekle</a>
+          </div>
+        </div>
+
+        <!-- Düğün -->
+        <div class="text-center p-10 border border-[#E8E1D5] rounded-tr-[3rem] rounded-bl-[3rem] bg-white shadow-sm hover:shadow-md transition">
+          <h3 class="font-handwriting text-5xl text-[#B99A5A] mb-4">Düğün</h3>
+          <p class="text-xl text-stone-800 mb-2">21 Mayıs 2026, Perşembe</p>
+          <p class="text-stone-500 mb-6">Saat: 19.30 - 23.59</p>
+          <p class="text-stone-600 mb-6"><strong>Göl Kenarı Tesisleri</strong><br>Gölbaşı, Ankara</p>
+          
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="#" class="inline-block border border-[#B99A5A] text-[#B99A5A] px-6 py-2 hover:bg-[#B99A5A] hover:text-white transition duration-300">Haritada Gör</a>
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Nurbanu+%26+%C5%9Eahin+D%C3%BC%C4%9F%C3%BCn&dates=20260521T163000Z/20260521T210000Z" target="_blank" class="inline-block border border-stone-300 text-stone-600 px-6 py-2 hover:bg-stone-100 transition duration-300">🗓️ Takvime Ekle</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="py-32 text-center reveal">
+      <h2 class="text-3xl text-stone-700 mb-6">Lütfen Katılım Durumunuzu Bildirin</h2>
+      <p class="text-stone-500 mb-10 max-w-lg mx-auto">Kapasite planlaması yapabilmemiz için en geç 10 Mayıs 2026 tarihine kadar LCV formunu doldurmanızı rica ederiz.</p>
+      <button class="bg-[#B99A5A] text-white px-10 py-4 text-lg tracking-widest uppercase hover:bg-stone-800 transition duration-500 shadow-xl shadow-[#b99a5a]/20">
+        LCV Formunu Doldur
+      </button>
+    </section>
+  </div>
+
+
+  <!-- ============================================== -->
+  <!-- FAZ 2: DÜĞÜN SONRASI (TAM SÜRÜM)               -->
+  <!-- ============================================== -->
+  <div id="postWeddingMode" class="hidden-mode">
+    
+    <section class="py-20 px-4 max-w-3xl mx-auto text-center reveal">
+      <h2 class="text-3xl text-[#B99A5A] mb-8">Teşekkür Ederiz</h2>
+      <p class="text-lg leading-relaxed text-stone-600 mb-10">
+        Bu masalsı günümüzde yanımızda olduğunuz, danslarımıza eşlik ettiğiniz ve mutluluğumuzu paylaştığınız için sonsuz teşekkürler. İşte o muhteşem geceden sizlerin gözüyle kalanlar...
+      </p>
+
+      <!-- Fotoğraf Yükleme Ana Butonu -->
+      <button class="bg-[#B99A5A] text-white px-10 py-4 tracking-widest uppercase hover:bg-stone-800 transition duration-500 shadow-xl flex items-center justify-center mx-auto gap-3">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+        Siz de Fotoğraf/Video Yükleyin
+      </button>
+    </section>
+
+    <!-- Tam Galeri (6 Fotoğraf) -->
+    <section class="max-w-7xl mx-auto px-4 pb-16 reveal">
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <img src="https://placehold.co/600x800/E8E1D5/8A7B61?text=Dugun+Anisi+1" alt="Galeri" class="w-full h-64 md:h-96 object-cover rounded-lg shadow-sm hover:scale-[1.02] transition duration-300 cursor-pointer">
+        <img src="https://placehold.co/600x600/E8E1D5/8A7B61?text=Dugun+Anisi+2" alt="Galeri" class="w-full h-64 md:h-96 object-cover rounded-lg shadow-sm hover:scale-[1.02] transition duration-300 cursor-pointer">
+        <img src="https://placehold.co/800x600/E8E1D5/8A7B61?text=Dugun+Anisi+3" alt="Galeri" class="w-full h-64 md:h-96 object-cover rounded-lg shadow-sm hover:scale-[1.02] transition duration-300 cursor-pointer">
+        <img src="https://placehold.co/600x400/E8E1D5/8A7B61?text=Dugun+Anisi+4" alt="Galeri" class="w-full h-64 md:h-96 object-cover rounded-lg shadow-sm hover:scale-[1.02] transition duration-300 cursor-pointer">
+        <img src="https://placehold.co/400x600/E8E1D5/8A7B61?text=Dugun+Anisi+5" alt="Galeri" class="w-full h-64 md:h-96 object-cover rounded-lg shadow-sm hover:scale-[1.02] transition duration-300 cursor-pointer">
+        <img src="https://placehold.co/600x800/E8E1D5/8A7B61?text=Dugun+Anisi+6" alt="Galeri" class="w-full h-64 md:h-96 object-cover rounded-lg shadow-sm hover:scale-[1.02] transition duration-300 cursor-pointer">
+      </div>
+    </section>
+
+    <!-- Galerinin Altına İkinci Bir Yükleme Alanı (Kullanıcı Deneyimi İçin Harikadır) -->
+    <section class="pb-24 text-center reveal">
+      <p class="text-stone-500 mb-4 text-sm">Gecede çektiğiniz kareleri henüz yüklemediniz mi?</p>
+      <button class="border-2 border-[#B99A5A] text-[#B99A5A] bg-white px-8 py-3 text-xs tracking-widest uppercase hover:bg-[#B99A5A] hover:text-white transition duration-300 inline-flex items-center gap-2">
+        <span>📸 Albüme Kare Ekle</span>
+      </button>
+    </section>
+
+    <!-- Anı Defteri -->
+    <section class="py-20 bg-white px-4 reveal border-t border-[#E8E1D5]">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl text-center text-[#B99A5A] mb-12">Anı Defteri</h2>
+        
+        <div class="space-y-8">
+          <div class="p-8 border border-[#E8E1D5] bg-[#FDFBF7] rounded-2xl relative shadow-sm">
+            <span class="font-handwriting text-6xl text-[#B99A5A]/20 absolute top-4 left-4">"</span>
+            <p class="text-stone-600 relative z-10 italic mt-2">Canım Nurbanu ve Şahin, hayat boyu gözlerinizdeki bu ışık hiç sönmesin. Harika bir düğündü, sizi çok seviyoruz!</p>
+            <p class="text-right mt-4 text-[#B99A5A] font-semibold">- Zeynep & Can Yılmaz</p>
+          </div>
+          <div class="p-8 border border-[#E8E1D5] bg-[#FDFBF7] rounded-2xl relative shadow-sm">
+             <span class="font-handwriting text-6xl text-[#B99A5A]/20 absolute top-4 left-4">"</span>
+            <p class="text-stone-600 relative z-10 italic mt-2">Bir ömür boyu mutluluklar dilerim. Düğün organizasyonu tek kelimeyle kusursuzdu!</p>
+            <p class="text-right mt-4 text-[#B99A5A] font-semibold">- Ahmet Arslan</p>
+          </div>
+        </div>
+
+        <div class="text-center mt-12">
+          <button class="bg-stone-800 text-white px-8 py-3 tracking-widest uppercase hover:bg-[#B99A5A] transition duration-500 shadow-md">
+            Siz De Dilek Bırakın
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <!-- ============================================== -->
+  <!-- ETKİLEŞİM İÇİN JAVASCRIPT EKLENTİSİ            -->
+  <!-- ============================================== -->
+  <script>
+    // 1. PRELOADER (Karşılama)
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const preloader = document.getElementById('preloader');
+        preloader.style.opacity = '0';
+        setTimeout(() => preloader.style.display = 'none', 1000);
+      }, 1500);
+    });
+
+    // 2. MÜZİK KONTROLÜ
+    const musicBtn = document.getElementById('musicBtn');
+    const bgMusic = document.getElementById('bgMusic');
+    const musicIcon = document.getElementById('musicIcon');
+    let isPlaying = false;
+
+    musicBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        bgMusic.pause();
+        musicIcon.classList.remove('spin-slow');
+        musicIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>';
+      } else {
+        bgMusic.play();
+        musicIcon.classList.add('spin-slow');
+        musicIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>';
+      }
+      isPlaying = !isPlaying;
+    });
+
+    // 3. SCROLL ANİMASYONLARI
+    function initAnimations() {
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      reveals.forEach(reveal => {
+        reveal.classList.remove('active');
+        observer.observe(reveal);
+      });
+    }
+
+    // 4. MOD GEÇİŞ SİSTEMİ (Zaman Makinesi)
+    let isPostWedding = false;
+    const btn = document.getElementById('timeMachineBtn');
+    const btnText = document.getElementById('btnText');
+    const subtitle = document.getElementById('heroSubtitle');
+    const preMode = document.getElementById('preWeddingMode');
+    const postMode = document.getElementById('postWeddingMode');
+
+    btn.addEventListener('click', () => {
+      isPostWedding = !isPostWedding;
+      
+      if(isPostWedding) {
+        preMode.classList.add('hidden-mode');
+        postMode.classList.remove('hidden-mode');
+        btnText.innerText = "Düğün Öncesine Dön";
+        subtitle.innerText = "Sonsuza Dek Birlikte";
+      } else {
+        postMode.classList.add('hidden-mode');
+        preMode.classList.remove('hidden-mode');
+        btnText.innerText = "Düğün Sonrasında Git";
+        subtitle.innerText = "Birlikte Yeni Bir Hayata";
+      }
+      
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        initAnimations();
+      }, 100);
+    });
+
+    window.addEventListener('DOMContentLoaded', initAnimations);
+  </script>
+</body>
+</html>

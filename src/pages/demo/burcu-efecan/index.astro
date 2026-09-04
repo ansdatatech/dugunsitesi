@@ -1,0 +1,186 @@
+---
+// src/pages/demo/burcu-efecan/index.astro
+import '../../../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Burcu & Efecan | Party Awaits!</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    body { font-family: 'Outfit', sans-serif; }
+    
+    .marquee-container { overflow: hidden; white-space: nowrap; }
+    .marquee-content { display: inline-block; animation: marquee 15s linear infinite; }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* Scroll Animasyonları */
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .hidden-mode { display: none !important; }
+  </style>
+</head>
+<body class="bg-slate-900 text-white overflow-x-hidden relative">
+
+  <!-- PRELOADER (Neon Efektli) -->
+  <div id="preloader" class="fixed inset-0 z-[100] bg-slate-900 flex items-center justify-center transition-opacity duration-1000">
+    <div class="text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-cyan-400 animate-pulse">B & E</div>
+  </div>
+
+  <!-- ARKA PLAN MÜZİĞİ (Elektronik/Party) -->
+  <audio id="bgMusic" loop src="https://cdn.pixabay.com/audio/2022/10/25/audio_51a37c35fa.mp3"></audio>
+  <button id="musicBtn" class="fixed bottom-6 right-6 z-50 bg-slate-800 text-cyan-400 border border-cyan-500/50 p-4 rounded-full shadow-[0_0_15px_rgba(34,211,238,0.3)] hover:bg-cyan-500 hover:text-white transition-all">
+    <svg id="musicIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>
+  </button>
+
+  <!-- ZAMAN MAKİNESİ BUTONU -->
+  <button id="timeMachineBtn" class="fixed top-6 right-6 z-50 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-xs font-bold tracking-widest uppercase hover:bg-white/20 transition border border-white/20">
+    <span id="btnText">After Party'e Geç</span>
+  </button>
+
+  <!-- KAHRAMAN ALANI (Sabit) -->
+  <section class="relative min-h-screen flex flex-col justify-center px-6 md:px-20 pt-20">
+    <div class="absolute top-20 left-10 w-72 h-72 bg-fuchsia-600 rounded-full mix-blend-screen filter blur-[100px] opacity-60"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500 rounded-full mix-blend-screen filter blur-[120px] opacity-50"></div>
+
+    <div class="relative z-10 reveal">
+      <p id="heroSubtitle" class="text-cyan-400 font-medium tracking-[0.2em] mb-4 uppercase text-sm md:text-base transition-all">Geri Sayım Başladı</p>
+      
+      <h1 class="text-7xl md:text-[10rem] font-black leading-none tracking-tighter mb-2 text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 via-pink-500 to-cyan-400">BURCU</h1>
+      <h1 class="text-7xl md:text-[10rem] font-black leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500">EFECAN</h1>
+      
+      <div class="mt-12 flex flex-col md:flex-row gap-6 md:items-center">
+        <div class="text-2xl md:text-4xl font-bold bg-white/10 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/20 inline-block">12 AĞUSTOS 2026</div>
+        <p class="text-slate-400 text-lg md:text-xl font-light">İzmir'de buluşuyoruz!</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="bg-gradient-to-r from-fuchsia-600 to-cyan-500 py-4 transform -rotate-2 scale-110 shadow-2xl z-20 relative reveal">
+    <div class="marquee-container text-white font-bold text-2xl tracking-widest uppercase">
+      <div class="marquee-content">
+        #BurcuEfecan2026 &nbsp; // &nbsp; WE ARE GETTING MARRIED &nbsp; // &nbsp; SAVE THE DATE &nbsp; // &nbsp; #BurcuEfecan2026 &nbsp; // &nbsp; WE ARE GETTING MARRIED &nbsp; // &nbsp; SAVE THE DATE &nbsp; // &nbsp;
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- FAZ 1: DÜĞÜN ÖNCESİ (TAM SÜRÜM)               -->
+  <!-- ============================================== -->
+  <div id="preWeddingMode">
+    <section class="py-32 px-6 md:px-20 max-w-7xl mx-auto relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
+        
+        <!-- Nikah -->
+        <div class="bg-white/5 backdrop-blur-lg border border-white/10 p-10 rounded-3xl hover:bg-white/10 transition-colors duration-300">
+          <div class="w-14 h-14 bg-cyan-500/20 text-cyan-400 rounded-full flex items-center justify-center mb-6"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div>
+          <h3 class="text-4xl font-bold mb-2">Nikah Töreni</h3>
+          <p class="text-cyan-400 font-medium mb-6">Saat: 16.30</p>
+          <p class="text-slate-300 text-lg mb-8">Swissôtel Büyük Efes<br>Alsancak, İzmir</p>
+          <button class="w-full bg-white/10 hover:bg-cyan-500 hover:text-white text-cyan-400 font-bold py-4 rounded-xl transition">Yol Tarifi Al</button>
+        </div>
+
+        <!-- After Party -->
+        <div class="bg-white/5 backdrop-blur-lg border border-white/10 p-10 rounded-3xl hover:bg-white/10 transition-colors duration-300">
+          <div class="w-14 h-14 bg-fuchsia-500/20 text-fuchsia-400 rounded-full flex items-center justify-center mb-6"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" /></svg></div>
+          <h3 class="text-4xl font-bold mb-2">After Party</h3>
+          <p class="text-fuchsia-400 font-medium mb-6">Saat: 21.00 - Sonsuzluk</p>
+          <p class="text-slate-300 text-lg mb-8">Ooze Venue<br>Bornova, İzmir</p>
+          <button class="w-full bg-white/10 hover:bg-fuchsia-500 hover:text-white text-fuchsia-400 font-bold py-4 rounded-xl transition">Yol Tarifi Al</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- LCV -->
+    <section class="py-20 px-6 text-center relative z-10 reveal">
+      <h2 class="text-4xl md:text-5xl font-black mb-6">Sen De Orada Olmalısın!</h2>
+      <p class="text-slate-400 text-lg mb-12 max-w-xl mx-auto">Mekanın kapasitesini ve eğlencenin dozunu ayarlayabilmemiz için lütfen aşağıdaki butondan durumunu bize bildir.</p>
+      <button class="relative group inline-block">
+        <div class="absolute -inset-1 bg-gradient-to-r from-fuchsia-600 to-cyan-500 rounded-full blur opacity-75 group-hover:opacity-100 transition animate-pulse"></div>
+        <span class="relative bg-slate-900 px-12 py-5 rounded-full font-bold text-xl block border border-slate-700 transition">LCV Formuna Git &rarr;</span>
+      </button>
+    </section>
+  </div>
+
+
+  <!-- ============================================== -->
+  <!-- FAZ 2: DÜĞÜN SONRASI (TAM SÜRÜM)               -->
+  <!-- ============================================== -->
+  <div id="postWeddingMode" class="hidden-mode">
+    <section class="py-20 px-6 max-w-4xl mx-auto text-center relative z-10 reveal">
+      <h2 class="text-4xl md:text-5xl font-black mb-6">Ne Geceydi Ama!</h2>
+      <p class="text-slate-400 text-lg mb-10">Sahneyi salladığınız, sabaha kadar bizimle dans ettiğiniz için teşekkürler. Geceden kalan efsane kareler burada!</p>
+      
+      <!-- Ana Fotoğraf Yükleme Butonu (Neon Gradient) -->
+      <button class="bg-gradient-to-r from-fuchsia-600 to-cyan-500 text-white px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition duration-300 flex items-center justify-center mx-auto gap-3 shadow-[0_0_20px_rgba(34,211,238,0.4)]">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+        Gecenin Karelerini Yükle
+      </button>
+    </section>
+
+    <!-- Galeri -->
+    <section class="max-w-7xl mx-auto px-6 pb-20 reveal">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <img src="https://placehold.co/400x400/1e293b/22d3ee?text=Party+1" class="w-full h-48 md:h-64 object-cover rounded-2xl hover:scale-105 transition duration-300">
+        <img src="https://placehold.co/400x400/1e293b/d946ef?text=Party+2" class="w-full h-48 md:h-64 object-cover rounded-2xl hover:scale-105 transition duration-300">
+        <img src="https://placehold.co/400x400/1e293b/3b82f6?text=Party+3" class="w-full h-48 md:h-64 object-cover rounded-2xl md:col-span-2 hover:scale-105 transition duration-300">
+      </div>
+    </section>
+
+    <!-- Mesajlar (Anı Defteri) -->
+    <section class="py-20 px-6 relative z-10 reveal">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-black mb-10 text-center text-cyan-400">Geceye Dair Mesajlar</h2>
+        <div class="space-y-6">
+          <div class="bg-white/5 backdrop-blur-md border border-fuchsia-500/30 p-6 rounded-2xl">
+            <p class="text-slate-300 text-lg italic">"Son yılların en iyi partisiydi. Mutluluğunuz daim olsun gençler!"</p>
+            <p class="text-fuchsia-400 font-bold mt-4 text-right">- Mert & Aslı</p>
+          </div>
+          <div class="bg-white/5 backdrop-blur-md border border-cyan-500/30 p-6 rounded-2xl">
+            <p class="text-slate-300 text-lg italic">"Ayaklarıma kara sular inene kadar dans ettim. Harikaydınız!"</p>
+            <p class="text-cyan-400 font-bold mt-4 text-right">- Zeynep</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // PRELOADER
+    window.addEventListener('load', () => setTimeout(() => {
+      const p = document.getElementById('preloader'); p.style.opacity = '0'; setTimeout(() => p.remove(), 1000);
+    }, 1500));
+
+    // MÜZİK
+    const mBtn = document.getElementById('musicBtn'); const bgM = document.getElementById('bgMusic');
+    let isP = false;
+    mBtn.addEventListener('click', () => { isP ? bgM.pause() : bgM.play(); isP = !isP; });
+
+    // ZAMAN MAKİNESİ (MOD GEÇİŞİ)
+    let isPost = false;
+    document.getElementById('timeMachineBtn').addEventListener('click', () => {
+      isPost = !isPost;
+      document.getElementById('preWeddingMode').classList.toggle('hidden-mode');
+      document.getElementById('postWeddingMode').classList.toggle('hidden-mode');
+      document.getElementById('btnText').innerText = isPost ? "Düğün Öncesine Dön" : "After Party'e Geç";
+      document.getElementById('heroSubtitle').innerText = isPost ? "Parti Sona Erdi" : "Geri Sayım Başladı";
+      setTimeout(() => { window.scrollTo({ top: 0, behavior: 'smooth' }); initAnimations(); }, 100);
+    });
+
+    // SCROLL ANİMASYONLARI
+    function initAnimations() {
+      const obs = new IntersectionObserver(e => e.forEach(en => { if(en.isIntersecting) en.target.classList.add('active'); }), { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(r => { r.classList.remove('active'); obs.observe(r); });
+    }
+    window.addEventListener('DOMContentLoaded', initAnimations);
+  </script>
+</body>
+</html>
